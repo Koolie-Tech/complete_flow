@@ -1,7 +1,7 @@
 # complete_flow
 
-```
-mermaid
+```mermaid
+
 flowchart TD
     subgraph BOOKING
     a1[Passenger APP OPEN]-->|NEW user| a2[Enter Number] 
