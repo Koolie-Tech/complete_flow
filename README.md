@@ -24,11 +24,13 @@ flowchart TD
     a1 --->|Number found,Registation not Found | a4  
  
     B1 ---> |Create Booking|C1{BOOKING} 
-    C1 ---> |GPS|c2[AUTO OBTAIN GPS] --->|lat,lon|GEOLOCATOR_DISTANCE
-    GEOLOCATOR_DISTANCE ---->|origin,destination,duration,distance| E1 
-    C1 --->|PNR| c3[Enter your PNR] ---> TRAIN_API ----> |train number,train name,time,date,coach position,current status|E1
-    C1 --->|TRAIN NUMBER| C4[Train Number & Date] ---->  |train running information |T3 ---> E1 
-    C1 --->|MANUAL SELECT STATION| C5[BANARAS STATION -BSBS] ---> E1
+    C1 ---> |GPS|c2[AUTO OBTAIN GPS] --->|lat,lon| C2(GEOLOCATOR)
+    C1 ----> |GPS denied by user| C2
+
+    C2 --->|PNR| c3[Enter your PNR] ---> TRAIN_API ----> |train number,train name,time,date,coach position,current status|E1
+    C2 --->|TRAIN NUMBER| C4[Train Number & Date] ---->  |train running information |T3 ---> E1 
+    C2 --->|MANUAL SELECT STATION| C5[BANARAS STATION -BSBS] ---> E1
+
     E1 ---->|BANARAS STATION -BSBS| E2{ORDER CAN BE CREATED}
     E1 ----> |IS not BANARAS STATION -BSBS| EN1[ORDER CANNOT BE CREATED as we dont serve this station]
     E2 -----> |luggage details & QTY| E3{LUgagge Info}
